@@ -1,0 +1,41 @@
+{
+  "name": "trxjs",
+  "version": "0.0.0",
+  "description": "trxjs",
+  "license": "MIT",
+  "repository": "",
+  "author": "",
+  "keywords": [
+    ""
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rimraf lib",
+    "lint": "tslint --format verbose 'src/**/*.ts'",
+    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
+    "watch": "npm run build -- --watch",
+    "watch:test": "npm run test -- --watch"
+  },
+  "dependencies": {
+    "@reactivex/rxjs": "^5.0.0-beta.12"
+  },
+  "devDependencies": {
+    "@types/chai": "3.4.30",
+    "@types/mocha": "2.2.29",
+    "@types/node": "6.0.31",
+    "chai": "^3.5.0",
+    "mocha": "^3.0.1",
+    "rimraf": "^2.5.4",
+    "ts-node": "^1.2.2",
+    "tslint": "3.14.0-dev.1",
+    "typescript": "2.0.0"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
