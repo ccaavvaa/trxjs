@@ -13,12 +13,11 @@ class RxjsT1 {
         let rules: any = {
             "1": async (msg: IMessage) => {
                 console.log("1 ", msg);
-                await this.af(msg, "1");
-                router.next({ kind: "2", body: "from 1" });
+                await this.af(router, msg, "1");
             },
             "2": async (msg: IMessage) => {
                 console.log("2 ", msg);
-                await this.af(msg, "2");
+                await this.af(router, msg, "2");
             },
         };
         router.subscribe({
@@ -39,10 +38,13 @@ class RxjsT1 {
         router.next({ kind: "2" });
     }
 
-    private af(msg: IMessage, id: string): Promise<void> {
+    private af(router: Subject<IMessage>, msg: IMessage, id: string): Promise<void> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 console.log("async ", id, " ", msg);
+                if (id == "1") {
+                    router.next({ kind: "2", body: "from 1" });
+                }
                 resolve();
             });
         });
